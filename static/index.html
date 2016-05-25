@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <!-- when using the mode "code", it's important to specify charset utf-8 -->
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <script src="client.built.js"></script>
+    <script src="textarea.js"></script>
+    <style>
+#textarea {
+  width: 400px;
+  height: 200px;
+  border: 2px solid #ccc;
+}
+    </style>
+  </head>
+  <body>
+    <textarea id="textarea"></textarea>
+    <script>
+      var connection = new window.sharedb.Connection(
+        new WebSocket("ws://localhost:8080"));
+
+      var collection = "default";
+      var id = "document-10";
+      // id = id + Math.round(Math.random() * 1000);
+      var doc = connection.get(collection, id);
+      doc.subscribe(function(error) {
+        if (error) {
+          console.log("Failed to subscribe.", error);
+        }
+        if (!doc.type) {
+          console.log('creating');
+          var defaultData = '';
+          var ottype = ottext.type.name;
+          console.log(ottype);
+          var source = true;
+          var callback = function() {
+            console.log(arguments);
+          };
+          doc.create(defaultData, ottype, source, callback);
+        }
+
+        // create the editor
+        var textarea = document.getElementById("textarea");
+        attachTextarea(textarea, doc);
+
+        // onChange:function(type, change) {
+        //   doc.submitOp([{p:[], od:doc.data, oi:editor.get()}], true);
+        // }}
+        // doc.on('op', function(op, local) {
+        //   if (!local) {
+        //     console.log("op:", op);
+        //     console.log("doc.data:", doc.data);
+        //     editor.set(doc.data);
+        //   }});
+
+
+      });
+
+    </script>
+  </body>
+</html>

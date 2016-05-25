@@ -1,0 +1,14 @@
+{
+  "name": "sharedb-textarea-example",
+  "version": "0.0.1",
+  "dependencies":{
+    "sharedb": "0.11.36",
+    "connect": "<3.0.0",
+    "ws": "1.0.1",
+    "ot-text": "1.0.1"
+  },
+  "scripts": {
+    "make": "browserify client.js --standalone sharedb,ottext > static/client.built.js",
+    "watch": "watchify client.js --standalone sharedb,ottext -o static/client.built.js"
+  }
+}
