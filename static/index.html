@@ -31,29 +31,14 @@
           console.log('creating');
           var defaultData = '';
           var ottype = ottext.type.name;
-          console.log(ottype);
           var source = true;
           var callback = function() {
             console.log(arguments);
           };
           doc.create(defaultData, ottype, source, callback);
         }
-
-        // create the editor
         var textarea = document.getElementById("textarea");
         attachTextarea(textarea, doc);
-
-        // onChange:function(type, change) {
-        //   doc.submitOp([{p:[], od:doc.data, oi:editor.get()}], true);
-        // }}
-        // doc.on('op', function(op, local) {
-        //   if (!local) {
-        //     console.log("op:", op);
-        //     console.log("doc.data:", doc.data);
-        //     editor.set(doc.data);
-        //   }});
-
-
       });
 
     </script>
